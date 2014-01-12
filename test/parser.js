@@ -1,5 +1,6 @@
 
-var p = require('../lib/parser');
+var p = require('../lib/parser'),
+    c = require('../lib/context');
 
 exports['Parse name'] = function (test) {
     var parser = p('name');
@@ -7,7 +8,7 @@ exports['Parse name'] = function (test) {
     var result = parser.parse('Name');
 
     test.ok(result);
-    test.equal(result.value, 'name');
+    test.equal(result.value.getName(), 'name');
     
     test.equal(parser.parse('Name'), null);
 };
@@ -18,7 +19,7 @@ exports['Parse name skipping spaces'] = function (test) {
     var result = parser.parse('Name');
 
     test.ok(result);
-    test.equal(result.value, 'name');
+    test.equal(result.value.getName(), 'name');
     
     test.equal(parser.parse('Name'), null);
 };
@@ -29,7 +30,7 @@ exports['Parse name with mixed case'] = function (test) {
     var result = parser.parse('Name');
 
     test.ok(result);
-    test.equal(result.value, 'Int');
+    test.equal(result.value.getName(), 'Int');
     
     test.equal(parser.parse('Name'), null);
 };
@@ -102,6 +103,20 @@ exports['Parse arithmetic expression using operator precedence'] = function (tes
     test.ok(result);
     test.ok(result.value);
     test.strictEqual(result.value.evaluate(), 2 + 3 * 4);
+    
+    test.equal(parser.parse('Expression'), null);
+};
+
+exports['Parse arithmetic expression using variable and operator precedence'] = function (test) {
+    var parser = p('two + 3*4');
+    var ctx = c();
+    ctx.setLocalValue('two', 2);
+    
+    var result = parser.parse('Expression');
+
+    test.ok(result);
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(ctx), 2 + 3 * 4);
     
     test.equal(parser.parse('Expression'), null);
 };
