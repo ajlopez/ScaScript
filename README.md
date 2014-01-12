@@ -40,7 +40,8 @@ MIT
 
 ## References
 
-- [Scala Getting Started](http://www.scala-lang.org/documentation/getting-started.html).
+- [Scala Getting Started](http://www.scala-lang.org/documentation/getting-started.html)
+- [Scala Tutorials](http://docs.scala-lang.org/tutorials/)
 
 ## Contribution
 
