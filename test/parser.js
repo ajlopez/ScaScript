@@ -12,6 +12,17 @@ exports['Parse name'] = function (test) {
     test.equal(parser.parse('Name'), null);
 };
 
+exports['Parse name skipping spaces'] = function (test) {
+    var parser = p('   name  ');
+    
+    var result = parser.parse('Name');
+
+    test.ok(result);
+    test.equal(result.value, 'name');
+    
+    test.equal(parser.parse('Name'), null);
+};
+
 exports['Parse name with mixed case'] = function (test) {
     var parser = p('Int');
     
@@ -29,7 +40,68 @@ exports['Parse integer'] = function (test) {
     var result = parser.parse('Integer');
 
     test.ok(result);
-    test.equal(result.value, '123');
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(), 123);
     
     test.equal(parser.parse('Integer'), null);
+};
+
+exports['Parse add integer expression and evaluate it'] = function (test) {
+    var parser = p('123+456');
+    
+    var result = parser.parse('Expression');
+
+    test.ok(result);
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(), 123 + 456);
+    
+    test.equal(parser.parse('Expression'), null);
+};
+
+exports['Parse subtract integer expression and evaluate it'] = function (test) {
+    var parser = p('123-456');
+    
+    var result = parser.parse('Expression');
+
+    test.ok(result);
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(), 123 - 456);
+    
+    test.equal(parser.parse('Expression'), null);
+};
+
+exports['Parse multiply integer expression and evaluate it'] = function (test) {
+    var parser = p('123*456');
+    
+    var result = parser.parse('Expression');
+
+    test.ok(result);
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(), 123 * 456);
+    
+    test.equal(parser.parse('Expression'), null);
+};
+
+exports['Parse divide integer expression and evaluate it'] = function (test) {
+    var parser = p('123/456');
+    
+    var result = parser.parse('Expression');
+
+    test.ok(result);
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(), 123 / 456);
+    
+    test.equal(parser.parse('Expression'), null);
+};
+
+exports['Parse arithmetic expression using operator precedence'] = function (test) {
+    var parser = p('2 + 3*4');
+    
+    var result = parser.parse('Expression');
+
+    test.ok(result);
+    test.ok(result.value);
+    test.strictEqual(result.value.evaluate(), 2 + 3 * 4);
+    
+    test.equal(parser.parse('Expression'), null);
 };
