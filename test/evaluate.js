@@ -24,3 +24,17 @@ exports['evaluate arithmetic expressions using integers'] = function (test) {
     test.strictEqual(evaluate('3 - 5'), 3 - 5);
 };
 
+exports['evaluate comparisons using integers'] = function (test) {
+    test.strictEqual(evaluate('1==1'), true);
+    test.strictEqual(evaluate('1==2'), false);
+    test.strictEqual(evaluate('1!=1'), false);
+    test.strictEqual(evaluate('1!=2'), true);
+    test.strictEqual(evaluate('1>1'), false);
+    test.strictEqual(evaluate('2>1'), true);
+    test.strictEqual(evaluate('1<1'), false);
+    test.strictEqual(evaluate('1<2'), true);
+    test.strictEqual(evaluate('1>=1'), true);
+    test.strictEqual(evaluate('2>=3'), false);
+    test.strictEqual(evaluate('1<=1'), true);
+    test.strictEqual(evaluate('1<=0'), false);
+};
