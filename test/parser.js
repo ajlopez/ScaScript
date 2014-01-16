@@ -120,3 +120,15 @@ exports['Parse arithmetic expression using variable and operator precedence'] = 
     
     test.equal(parser.parse('Expression'), null);
 };
+
+exports['Parse var statement'] = function (test) {
+    var parser = p('var a = 1;');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+};
