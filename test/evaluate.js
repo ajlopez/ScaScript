@@ -24,6 +24,16 @@ exports['evaluate arithmetic expressions using integers'] = function (test) {
     test.strictEqual(evaluate('3 - 5'), 3 - 5);
 };
 
+exports['evaluate arithmetic expressions using variables'] = function (test) {
+    var ctx = c();
+    ctx.setLocalValue('one', 1);
+    ctx.setLocalValue('two', 2);
+    ctx.setLocalValue('three', 3);
+    test.strictEqual(evaluate('one+one', ctx), 2);
+    test.strictEqual(evaluate('two+three*three', ctx), 2 + 3 * 3);
+    test.strictEqual(evaluate('three - one', ctx), 3 - 1);
+};
+
 exports['evaluate comparisons using integers'] = function (test) {
     test.strictEqual(evaluate('1==1'), true);
     test.strictEqual(evaluate('1==2'), false);
