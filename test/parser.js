@@ -132,3 +132,15 @@ exports['Parse var statement'] = function (test) {
     test.ok(result.value.getExpression());
     test.equal(result.value.getExpression().evaluate(), 1);
 };
+
+exports['Parse val statement'] = function (test) {
+    var parser = p('val a = 1;');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+};
