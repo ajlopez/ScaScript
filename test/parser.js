@@ -122,7 +122,7 @@ exports['Parse arithmetic expression using variable and operator precedence'] = 
 };
 
 exports['Parse var statement'] = function (test) {
-    var parser = p('var a = 1;');
+    var parser = p('var a = 1');
     
     var result = parser.parse('Statement');
     
@@ -133,7 +133,33 @@ exports['Parse var statement'] = function (test) {
     test.equal(result.value.getExpression().evaluate(), 1);
 };
 
+exports['Parse var statement with semicolon'] = function (test) {
+    var parser = p('var a = 1;');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+    
+    test.equal(parser.next(), null);
+};
+
 exports['Parse val statement'] = function (test) {
+    var parser = p('val a = 1');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+};
+
+exports['Parse val statement with semicolon'] = function (test) {
     var parser = p('val a = 1;');
     
     var result = parser.parse('Statement');
@@ -143,4 +169,28 @@ exports['Parse val statement'] = function (test) {
     test.equal(result.value.getName(), 'a');
     test.ok(result.value.getExpression());
     test.equal(result.value.getExpression().evaluate(), 1);
+    
+    test.equal(parser.next(), null);
+};
+
+exports['Parse two val statements in two lines'] = function (test) {
+    var parser = p('val a = 1\r\nval b = 2');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'b');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 2);
+    
+    test.equal(parser.next(), null);
 };
