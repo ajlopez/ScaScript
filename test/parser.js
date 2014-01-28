@@ -261,6 +261,18 @@ exports['Parse two var statements separated by semicolon'] = function (test) {
     test.equal(parser.next(), null);
 };
 
+exports['Parse simple def with name and expression'] = function (test) {
+    var parser = p('def foo = 0');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'foo');
+    test.equal(result.value.getType(), null);
+    test.ok(result.value.getExpression());
+};
+
 exports['Parse simple def with name and type'] = function (test) {
     var parser = p('def foo: Int = 0');
     
