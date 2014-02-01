@@ -147,6 +147,21 @@ exports['Parse var statement with semicolon'] = function (test) {
     test.equal(parser.next(), null);
 };
 
+exports['Parse var statement with type'] = function (test) {
+    var parser = p('var a : Int = 1;');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.equal(result.value.getType(), 'Int');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+    
+    test.equal(parser.next(), null);
+};
+
 exports['Parse val statement'] = function (test) {
     var parser = p('val a = 1');
     
@@ -167,6 +182,21 @@ exports['Parse val statement with semicolon'] = function (test) {
     test.ok(result);
     test.ok(result.value);
     test.equal(result.value.getName(), 'a');
+    test.ok(result.value.getExpression());
+    test.equal(result.value.getExpression().evaluate(), 1);
+    
+    test.equal(parser.next(), null);
+};
+
+exports['Parse val statement with type'] = function (test) {
+    var parser = p('val a : Int = 1;');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'a');
+    test.equal(result.value.getType(), 'Int');
     test.ok(result.value.getExpression());
     test.equal(result.value.getExpression().evaluate(), 1);
     
