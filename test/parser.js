@@ -314,3 +314,13 @@ exports['Parse simple def with name and type'] = function (test) {
     test.equal(result.value.getType(), 'Int');
     test.ok(result.value.getExpression());
 };
+
+exports['Parse empty class with name'] = function (test) {
+    var parser = p('class Dog { }');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'Dog');
+};
