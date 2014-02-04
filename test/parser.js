@@ -323,4 +323,22 @@ exports['Parse empty class with name'] = function (test) {
     test.ok(result);
     test.ok(result.value);
     test.equal(result.value.getName(), 'Dog');
+    test.ok(result.value.getStatements());
+    test.ok(Array.isArray(result.value.getStatements()));
+};
+
+exports['Parse class with name and def'] = function (test) {
+    var parser = p('class Dog {\n def one = 1\n}');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'Dog');
+    test.ok(result.value.getStatements());
+    test.ok(Array.isArray(result.value.getStatements()));
+    
+    var stmts = result.value.getStatements();
+    
+    test.equal(stmts.length, 1);
 };
