@@ -342,3 +342,35 @@ exports['Parse class with name and def'] = function (test) {
     
     test.equal(stmts.length, 1);
 };
+
+exports['Parse class with name and two defdef'] = function (test) {
+    var parser = p('class Dog {\n def one = 1\n def two = 2\r\n}');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'Dog');
+    test.ok(result.value.getStatements());
+    test.ok(Array.isArray(result.value.getStatements()));
+    
+    var stmts = result.value.getStatements();
+    
+    test.equal(stmts.length, 2);
+};
+
+exports['Parse class with name and two defs in a line'] = function (test) {
+    var parser = p('class Dog { def one = 1; def two = 2 }');
+    
+    var result = parser.parse('Statement');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.equal(result.value.getName(), 'Dog');
+    test.ok(result.value.getStatements());
+    test.ok(Array.isArray(result.value.getStatements()));
+    
+    var stmts = result.value.getStatements();
+    
+    test.equal(stmts.length, 2);
+};
