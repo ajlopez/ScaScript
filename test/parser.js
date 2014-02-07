@@ -343,7 +343,7 @@ exports['Parse class with name and def'] = function (test) {
     test.equal(stmts.length, 1);
 };
 
-exports['Parse class with name and two defdef'] = function (test) {
+exports['Parse class with name and two def separated by lines'] = function (test) {
     var parser = p('class Dog {\n def one = 1\n def two = 2\r\n}');
     
     var result = parser.parse('Statement');
@@ -373,4 +373,16 @@ exports['Parse class with name and two defs in a line'] = function (test) {
     var stmts = result.value.getStatements();
     
     test.equal(stmts.length, 2);
+};
+
+
+exports['Parse two defs'] = function (test) {
+    var parser = p('def one = 1; def two = 2');
+    
+    var result = parser.parse('Suite');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.ok(Array.isArray(result.value));
+    test.equal(result.value.length, 2);
 };
