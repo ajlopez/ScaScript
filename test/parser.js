@@ -375,7 +375,6 @@ exports['Parse class with name and two defs in a line'] = function (test) {
     test.equal(stmts.length, 2);
 };
 
-
 exports['Parse two defs'] = function (test) {
     var parser = p('def one = 1; def two = 2');
     
@@ -385,4 +384,15 @@ exports['Parse two defs'] = function (test) {
     test.ok(result.value);
     test.ok(Array.isArray(result.value));
     test.equal(result.value.length, 2);
+};
+
+exports['Parse three defs'] = function (test) {
+    var parser = p('def one = 1; def two = 2; def three = 3');
+    
+    var result = parser.parse('Suite');
+    
+    test.ok(result);
+    test.ok(result.value);
+    test.ok(Array.isArray(result.value));
+    test.equal(result.value.length, 3);
 };
