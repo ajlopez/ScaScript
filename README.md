@@ -43,6 +43,7 @@ MIT
 - [Scala Getting Started](http://www.scala-lang.org/documentation/getting-started.html)
 - [Scala Tutorials](http://docs.scala-lang.org/tutorials/)
 - [Scalacheat](http://docs.scala-lang.org/cheatsheets/)
+- [Scala parboiled2 syntax](https://github.com/rcano/sps)
 
 ## Contribution
 
