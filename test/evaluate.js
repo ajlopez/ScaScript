@@ -24,6 +24,11 @@ exports['evaluate arithmetic expressions using integers'] = function (test) {
     test.strictEqual(evaluate('3 - 5'), 3 - 5);
 };
 
+exports['evaluate modulus'] = function (test) {
+    test.strictEqual(evaluate('4 % 2'), 0);
+    test.strictEqual(evaluate('5 % 3'), 2);
+};
+
 exports['evaluate arithmetic expressions using variables'] = function (test) {
     var ctx = c();
     ctx.setLocalValue('one', 1);
