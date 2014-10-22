@@ -14,9 +14,21 @@ exports['execute var statement'] = function (test) {
     test.strictEqual(ctx.getLocalValue('a'), 1);
 };
 
+exports['execute var int statement'] = function (test) {
+    var ctx = c();
+    execute('var a:Int = 1', ctx);
+    test.strictEqual(ctx.getLocalValue('a'), 1);
+};
+
 exports['execute val statement'] = function (test) {
     var ctx = c();
     execute('val a = 1', ctx);
+    test.strictEqual(ctx.getLocalValue('a'), 1);
+};
+
+exports['execute val int statement'] = function (test) {
+    var ctx = c();
+    execute('val a:Int = 1', ctx);
     test.strictEqual(ctx.getLocalValue('a'), 1);
 };
 
