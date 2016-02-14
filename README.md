@@ -44,6 +44,7 @@ MIT
 - [Scala Tutorials](http://docs.scala-lang.org/tutorials/)
 - [Scalacheat](http://docs.scala-lang.org/cheatsheets/)
 - [Scala parboiled2 syntax](https://github.com/rcano/sps)
+- [The allure of Scala.js](http://blog.ramnivas.com/technology/2016/02/09/the-allure-of-scalajs.html)
 
 ## Contribution
 
